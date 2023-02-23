@@ -14,7 +14,7 @@ package-job:
 
 build-job:
   tags:
-    - CD
+    - ci
   stage: build
   script:
     - ls
@@ -23,7 +23,7 @@ build-job:
 
 deploy-job:
   tags:
-    - CD
+    - ci
   stage: deploy
   script:
     - sshpass -p msdnmm,. scp -r ./build root@192.168.0.158:/home/nginx/html/test2
