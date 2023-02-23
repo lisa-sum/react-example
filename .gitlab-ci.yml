@@ -1,0 +1,29 @@
+stages: # 分段
+  - package
+  - build
+  - deploy
+
+cache: # 缓存
+  paths:
+    - node_modules
+    - build
+package-job:
+  image: node
+  stage: package
+  script: npm install pnpm
+
+build-job:
+  tags:
+    - CD
+  stage: build
+  script:
+    - ls
+    - pwd
+    - pnpm run build
+
+deploy-job:
+  tags:
+    - CD
+  stage: deploy
+  script:
+    - sshpass -p msdnmm,. scp -r ./build root@192.168.0.158:/home/nginx/html/test2
